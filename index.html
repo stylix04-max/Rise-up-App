@@ -187,6 +187,30 @@ body{background:var(--sky);color:var(--white);font-family:'DM Sans',sans-serif;m
 .review-text{font-size:13px;line-height:1.75;}
 .review-btn{width:100%;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;padding:11px;cursor:pointer;margin-bottom:9px;}
 .review-btn:disabled{opacity:.4;cursor:not-allowed;}
+.calm-card{background:var(--card);border:1px solid var(--border);padding:16px 15px;margin-bottom:10px;}
+.breath-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 10px;}
+.breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(91,141,239,.35),rgba(167,139,250,.15));border:2px solid rgba(91,141,239,.4);display:flex;align-items:center;justify-content:center;transition:transform 4s ease-in-out;margin-bottom:18px;}
+.breath-circle.inhale{transform:scale(1.5);transition:transform 4s ease-in-out;}
+.breath-circle.exhale{transform:scale(1);transition:transform 4s ease-in-out;}
+.breath-circle.hold{transition:transform .3s ease;}
+.breath-label{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--white);letter-spacing:.05em;}
+.breath-sub{font-size:11px;color:var(--dim);margin-top:14px;text-align:center;}
+.breath-start-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--purple));color:white;border:none;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;letter-spacing:.06em;padding:13px;cursor:pointer;}
+.dump-textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.7;outline:none;resize:none;min-height:140px;padding:12px;}
+.dump-textarea::placeholder{color:var(--dim);}
+.dump-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px;}
+.worry-input{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;padding:10px 12px;outline:none;margin-bottom:9px;}
+.worry-input::placeholder{color:var(--dim);}
+.worry-result{padding:13px 14px;margin-top:10px;border-left:3px solid var(--purple);background:var(--input-bg);}
+.worry-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:12px;margin-bottom:8px;}
+.worry-tag.control{background:rgba(61,220,132,.18);color:var(--green);}
+.worry-tag.outside{background:rgba(255,79,79,.18);color:var(--red);}
+.fine-item{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;background:var(--card);border:1px solid var(--border);margin-bottom:7px;}
+.fine-emoji{font-size:18px;flex-shrink:0;}
+.fine-text{font-size:13px;flex:1;line-height:1.5;}
+.fine-text.worried{color:var(--soft);text-decoration:line-through;margin-bottom:3px;}
+.fine-date{font-size:10px;color:var(--dim);margin-top:3px;}
+.fine-resolve-btn{background:rgba(61,220,132,.15);border:1px solid rgba(61,220,132,.35);color:var(--green);font-size:10px;font-weight:600;padding:5px 10px;cursor:pointer;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0;}
 .wgoal{background:var(--card);border:1px solid var(--border);padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
 .wgn{font-size:12px;font-weight:500;flex:1;}
 .wgs{font-size:11px;color:var(--o2);font-weight:600;}
@@ -272,6 +296,8 @@ body{background:var(--sky);color:var(--white);font-family:'DM Sans',sans-serif;m
     <button class="tab active" data-tab="hype" onclick="switchTab('hype')"><span class="ti">⚡</span>Hype</button>
     <button class="tab" data-tab="money" onclick="switchTab('money')"><span class="ti">💰</span>Money</button>
     <button class="tab" data-tab="health" onclick="switchTab('health')"><span class="ti">⚖️</span>Health</button>
+    <button class="tab" data-tab="life" onclick="switchTab('life')"><span class="ti">⏳</span>Life</button>
+    <button class="tab" data-tab="calm" onclick="switchTab('calm')"><span class="ti">🧘</span>Calm</button>
     <button class="tab" data-tab="shop" onclick="switchTab('shop')"><span class="ti">🛒</span>Shop</button>
     <button class="tab" data-tab="tasks" onclick="switchTab('tasks')"><span class="ti">✅</span>Tasks</button>
     <button class="tab" data-tab="goals" onclick="switchTab('goals')"><span class="ti">🎯</span>Goals</button>
@@ -291,6 +317,7 @@ body{background:var(--sky);color:var(--white);font-family:'DM Sans',sans-serif;m
     <div class="mood-card"><div class="ce" style="color:var(--o2)">😊 MORNING ENERGY</div><div class="mood-row" id="moodRow"><button class="mood-btn" data-mood="1" onclick="selectMood(1)">😴</button><button class="mood-btn" data-mood="2" onclick="selectMood(2)">😕</button><button class="mood-btn" data-mood="3" onclick="selectMood(3)">😐</button><button class="mood-btn" data-mood="4" onclick="selectMood(4)">😊</button><button class="mood-btn" data-mood="5" onclick="selectMood(5)">🔥</button></div><div class="mood-lr"><span class="mood-lbl">Low</span><span class="mood-lbl">On fire</span></div></div>
     <div class="cc"><div class="ce" style="color:var(--o2)">⚡ TODAY'S AFFIRMATION</div><div class="affirm-text" id="affirmText"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Loading...</div></div></div>
     <div class="cc"><div class="ce" style="color:var(--o2)">💬 QUOTE TO CARRY</div><div class="quote-text" id="quoteText"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Loading...</div></div><div class="quote-author" id="quoteAuthor"></div></div>
+    <div class="cc" style="border-left:3px solid var(--blue);"><div class="ce" style="color:var(--blue)">🌌 PERSPECTIVE FACT</div><div id="factText" style="font-size:13px;color:var(--white);line-height:1.65;"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Loading...</div></div></div>
     <div class="cc" id="recCard"><div class="ce" id="recLabel" style="color:var(--purple)">🎵 TODAY'S PICK</div><div id="recTitle" style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:5px;"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Loading...</div></div><div id="recCreator" style="font-size:11px;color:var(--purple);font-weight:500;margin-bottom:6px;"></div><div id="recReason" style="font-size:13px;color:var(--soft);line-height:1.6;"></div></div>
     <div class="cc"><div class="ce" style="color:var(--o2)">🎤 PERSONAL PEP TALK</div><div class="pep-text" id="pepText"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Loading...</div></div></div>
     <div class="row-btns"><button class="ghost-btn" onclick="copyAll()">📋 Copy All</button><button class="ghost-btn" onclick="openCardModal()">🖼 Morning Card</button></div>
@@ -419,6 +446,103 @@ body{background:var(--sky);color:var(--white);font-family:'DM Sans',sans-serif;m
     <button class="big-btn" onclick="openCardModal()" style="margin-top:8px;">🖼 Generate Shareable Card</button>
   </div>
 
+  <!-- LIFE -->
+  <div class="screen" id="tab-life">
+    <div id="lifeQuizSection">
+      <div class="sh">⏳ Life Predictor</div>
+      <div class="cc" style="border-left:3px solid var(--purple);">
+        <div class="ce" style="color:var(--purple)">ℹ️ HOW THIS WORKS</div>
+        <div style="font-size:12px;color:var(--soft);line-height:1.65;">Answer a few quick questions for a baseline estimate. Unlike a one-off quiz, this number moves with you — as you log healthier weight trends, keep exercise goals, and maintain your not-to-do streaks, your estimate adjusts. This is a motivational tool, not medical advice.</div>
+      </div>
+      <div class="cc">
+        <div class="ce" style="color:var(--purple)">📋 QUICK QUIZ</div>
+        <label class="flbl">Current Age</label>
+        <input type="number" class="inp-sm" id="lifeAge" placeholder="e.g. 28" style="margin-bottom:10px;-moz-appearance:textfield;">
+        <label class="flbl">Biological sex (for actuarial baseline)</label>
+        <div class="chip-row" id="lifeSexChips"><button class="chip active" data-sex="female">Female</button><button class="chip" data-sex="male">Male</button></div>
+        <label class="flbl">Average sleep per night</label>
+        <div class="chip-row" id="lifeSleepChips"><button class="chip" data-sleep="poor">Under 6h</button><button class="chip active" data-sleep="ok">6-8h</button><button class="chip" data-sleep="great">8h+</button></div>
+        <label class="flbl">Exercise frequency</label>
+        <div class="chip-row" id="lifeExChips"><button class="chip" data-ex="none">Rarely</button><button class="chip active" data-ex="some">1-3x/week</button><button class="chip" data-ex="lots">4x+/week</button></div>
+        <label class="flbl">Diet quality</label>
+        <div class="chip-row" id="lifeDietChips"><button class="chip" data-diet="poor">Mostly processed</button><button class="chip active" data-diet="ok">Mixed</button><button class="chip" data-diet="great">Mostly whole foods</button></div>
+        <label class="flbl">Smoking</label>
+        <div class="chip-row" id="lifeSmokeChips"><button class="chip active" data-smoke="no">No</button><button class="chip" data-smoke="yes">Yes</button></div>
+        <label class="flbl">Average stress level</label>
+        <div class="chip-row" id="lifeStressChips"><button class="chip" data-stress="high">High</button><button class="chip active" data-stress="med">Moderate</button><button class="chip" data-stress="low">Low</button></div>
+        <button class="big-btn" onclick="calculateLifeEstimate()">CALCULATE MY ESTIMATE →</button>
+      </div>
+    </div>
+    <div id="lifeResultSection" style="display:none;">
+      <div class="sh">⏳ Your Living Estimate</div>
+      <div class="weight-hero" style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(91,141,239,.06));border-color:rgba(167,139,250,.25);">
+        <div class="money-lbl">Estimated Lifespan</div>
+        <div><span class="weight-big" id="lifeEstimateAge" style="background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span><span class="weight-unit"> years</span></div>
+        <div style="font-size:12px;color:var(--dim);margin-top:8px;" id="lifeAdjustNote"></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-val" style="color:var(--purple)" id="lifeDaysLived">0</div><div class="stat-lbl">Days Lived</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--blue)" id="lifeWeeksLeft">0</div><div class="stat-lbl">Weeks Left</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--gold)" id="lifeSummersLeft">0</div><div class="stat-lbl">Summers Left</div></div>
+      </div>
+      <div class="cc">
+        <div class="ce" style="color:var(--purple)">📈 WHAT'S MOVING YOUR NUMBER</div>
+        <div id="lifeFactorsList" style="font-size:13px;color:var(--soft);line-height:1.9;"></div>
+      </div>
+      <div class="cc" style="border-left:3px solid var(--gold);">
+        <div class="ce" style="color:var(--gold)">💡 REFLECTION</div>
+        <div style="font-size:13px;color:var(--soft);line-height:1.65;">This number isn't a prophecy — it's a mirror. Every healthy choice you log nudges it upward. Every habit you change is reflected here. Use it as fuel, not fear.</div>
+      </div>
+      <button class="ghost-btn" onclick="retakeLifeQuiz()" style="width:100%;margin-top:8px;">↺ Retake Quiz</button>
+    </div>
+  </div>
+
+  <!-- CALM -->
+  <div class="screen" id="tab-calm">
+    <div class="sh">🧘 Calm Toolkit</div>
+
+    <!-- BREATHING -->
+    <div class="calm-card">
+      <div class="ce" style="color:var(--blue)">🌬️ BOX BREATHING</div>
+      <div class="breath-wrap">
+        <div class="breath-circle" id="breathCircle"><div class="breath-label" id="breathLabel">Ready?</div></div>
+        <div class="breath-sub" id="breathSub">4 seconds in, 4 hold, 4 out, 4 hold — repeated for 4 rounds</div>
+      </div>
+      <button class="breath-start-btn" id="breathBtn" onclick="startBreathing()">START BREATHING</button>
+    </div>
+
+    <!-- BRAIN DUMP -->
+    <div class="calm-card">
+      <div class="ce" style="color:var(--purple)">🧠 BRAIN DUMP</div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:9px;line-height:1.5;">Get it out of your head. Nothing here is saved long-term — just type, breathe, clear.</div>
+      <textarea class="dump-textarea" id="dumpText" placeholder="What's swirling in your mind right now? Just let it out..."></textarea>
+      <div class="dump-actions">
+        <button class="ghost-btn" onclick="clearDump()">🗑 Clear It</button>
+        <button class="save-sm" style="margin-top:0;" onclick="saveDumpToJournal()">📓 Save to Journal</button>
+      </div>
+    </div>
+
+    <!-- WORRY SORTING -->
+    <div class="calm-card">
+      <div class="ce" style="color:var(--gold)">⚖️ SORT A WORRY</div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:9px;line-height:1.5;">Write down what's worrying you. We'll help you see whether it's something you can act on or something to let go of.</div>
+      <input type="text" class="worry-input" id="worryInput" placeholder="What's worrying you right now?">
+      <button class="save-sm" style="background:rgba(255,209,102,.15);border-color:rgba(255,209,102,.35);color:var(--gold);" onclick="sortWorry()" id="worrySortBtn">Sort This Worry</button>
+      <div id="worryResultArea"></div>
+    </div>
+
+    <!-- TURNED OUT FINE LOG -->
+    <div class="calm-card">
+      <div class="ce" style="color:var(--green)">✅ THINGS THAT TURNED OUT FINE</div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:9px;line-height:1.5;">Log what you're worried about. Come back later and mark it resolved — over time this becomes proof that most worries don't come true.</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <input type="text" class="inp-sm" id="fineWorryInput" placeholder="I'm worried that..." style="flex:1;">
+        <button class="save-sm" style="width:auto;padding:8px 14px;margin-top:0;" onclick="addFineEntry()">Log</button>
+      </div>
+      <div id="fineList"></div>
+    </div>
+  </div>
+
   <!-- ALARM -->
   <div class="screen" id="tab-alarm">
     <div class="sh">Morning Alarm</div>
@@ -435,7 +559,7 @@ const SUPA_URL='https://ouvvtopmlltzvqizqcii.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91dnZ0b3BtbGx0enZxaXpxY2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1NzkwMzQsImV4cCI6MjA5ODE1NTAzNH0.BqUa9qzqHz42esoUZWLT20x3GmkUHMSQvr_SvieHtF8';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
 let currentUser=null,isGuest=false;
-let state={name:'',focus:'crushing my goals',alarmTime:'07:00',alarmOn:false,goals:[],hypeData:{},dailyLog:{},transactions:[],moneyGoals:[],startingBalance:0,weightUnit:'kg',targetWeight:null,weightLog:[],calGoal:2000,tasks:[],notdos:[],shopList:null,shopCurrency:'£',shopDuration:7,shopDiet:'no restrictions'};
+let state={name:'',focus:'crushing my goals',alarmTime:'07:00',alarmOn:false,goals:[],hypeData:{},dailyLog:{},transactions:[],moneyGoals:[],startingBalance:0,weightUnit:'kg',targetWeight:null,weightLog:[],calGoal:2000,tasks:[],notdos:[],shopList:null,shopCurrency:'£',shopDuration:7,shopDiet:'no restrictions',lifeData:null,fineLog:[]};
 let alarmTimeout=null,selGoalTypeVal='checkbox',clockInterval=null,weekOffset=0,journalDayOffset=0,transType='income',calType='food',selectedPriority='normal',selectedTransCat='General';
 let appReady=false;
 
@@ -461,7 +585,7 @@ function showAuthTab(tab){document.getElementById('signupTab').classList.toggle(
 function showAuthErr(msg){const el=document.getElementById('authErr');el.textContent=msg;el.style.display='block';}
 async function signUp(){const email=document.getElementById('suEmail').value.trim(),pass=document.getElementById('suPass').value;if(!email||!pass){showAuthErr('Fill in all fields.');return;}if(pass.length<6){showAuthErr('Password needs 6+ characters.');return;}const btn=document.getElementById('signupBtn');btn.disabled=true;btn.textContent='Creating…';const{data,error}=await sb.auth.signUp({email,password:pass});btn.disabled=false;btn.textContent='CREATE ACCOUNT →';if(error){showAuthErr(error.message);return;}if(data.user&&!data.session){showAuthErr('✅ Check your email to confirm, then sign in.');showAuthTab('signin');return;}currentUser=data.user;show('setupScreen');}
 async function signIn(){const email=document.getElementById('siEmail').value.trim(),pass=document.getElementById('siPass').value;if(!email||!pass){showAuthErr('Fill in all fields.');return;}const btn=document.getElementById('signinBtn');btn.disabled=true;btn.textContent='Signing in…';const{data,error}=await sb.auth.signInWithPassword({email,password:pass});btn.disabled=false;btn.textContent='SIGN IN →';if(error){showAuthErr(error.message);return;}currentUser=data.user;await loadUserData();}
-async function signOut(){if(!confirm('Sign out?'))return;await sb.auth.signOut();isGuest=false;appReady=false;localStorage.removeItem('riseup_state');state={name:'',focus:'crushing my goals',alarmTime:'07:00',alarmOn:false,goals:[],hypeData:{},dailyLog:{},transactions:[],moneyGoals:[],startingBalance:0,weightUnit:'kg',targetWeight:null,weightLog:[],calGoal:2000,tasks:[],notdos:[],shopList:null,shopCurrency:'£',shopDuration:7,shopDiet:'no restrictions'};show('authScreen');}
+async function signOut(){if(!confirm('Sign out?'))return;await sb.auth.signOut();isGuest=false;appReady=false;localStorage.removeItem('riseup_state');state={name:'',focus:'crushing my goals',alarmTime:'07:00',alarmOn:false,goals:[],hypeData:{},dailyLog:{},transactions:[],moneyGoals:[],startingBalance:0,weightUnit:'kg',targetWeight:null,weightLog:[],calGoal:2000,tasks:[],notdos:[],shopList:null,shopCurrency:'£',shopDuration:7,shopDiet:'no restrictions',lifeData:null,fineLog:[]};show('authScreen');}
 function continueAsGuest(){isGuest=true;show('setupScreen');}
 
 async function loadUserData(){
@@ -479,7 +603,7 @@ async function loadUserData(){
       state.transactions=meta.transactions||[];state.moneyGoals=meta.moneyGoals||[];state.startingBalance=meta.startingBalance||0;
       state.weightUnit=meta.weightUnit||'kg';state.targetWeight=meta.targetWeight||null;state.weightLog=meta.weightLog||[];
       state.calGoal=meta.calGoal||2000;state.tasks=meta.tasks||[];state.notdos=meta.notdos||[];
-      state.shopList=meta.shopList||null;state.shopCurrency=meta.shopCurrency||'£';state.shopDuration=meta.shopDuration||7;state.shopDiet=meta.shopDiet||'no restrictions';
+      state.shopList=meta.shopList||null;state.shopCurrency=meta.shopCurrency||'£';state.shopDuration=meta.shopDuration||7;state.shopDiet=meta.shopDiet||'no restrictions';state.lifeData=meta.lifeData||null;state.fineLog=meta.fineLog||[];
       state.goals=(goals.data||[]).map(g=>({id:g.id,name:g.name,type:g.type,checkedToday:g.checked_today,lastChecked:g.last_checked,streak:g.streak,current:g.current,target:g.target,unit:g.unit}));
       state.dailyLog={};
       (logs.data||[]).forEach(l=>{state.dailyLog[l.date_key]={opened:l.opened,goalsDone:l.goals_done,mood:l.mood,intention:l.intention,gratitude:l.gratitude||['','',''],journalEntry:l.journal_entry,hypeSnapshot:l.hype_snapshot||{},calLog:l.cal_log||[]};});
@@ -497,7 +621,7 @@ async function loadUserData(){
   showSync(false);
 }
 
-async function syncToCloud(){if(!currentUser)return;showSync(true);try{const uid=currentUser.id;const meta={transactions:state.transactions,moneyGoals:state.moneyGoals,startingBalance:state.startingBalance,weightUnit:state.weightUnit,targetWeight:state.targetWeight,weightLog:state.weightLog,calGoal:state.calGoal,tasks:state.tasks,notdos:state.notdos,shopList:state.shopList,shopCurrency:state.shopCurrency,shopDuration:state.shopDuration,shopDiet:state.shopDiet};await sb.from('profiles').upsert({id:uid,name:state.name,focus:state.focus,alarm_time:state.alarmTime,alarm_on:state.alarmOn,meta});for(const g of state.goals)await sb.from('goals').upsert({id:g.id,user_id:uid,name:g.name,type:g.type,checked_today:g.checkedToday,last_checked:g.lastChecked,streak:g.streak,current:g.current,target:g.target,unit:g.unit});for(const[k,v]of Object.entries(state.dailyLog||{}))await sb.from('daily_log').upsert({user_id:uid,date_key:k,opened:v.opened,goals_done:v.goalsDone,mood:v.mood,intention:v.intention,gratitude:v.gratitude||['','',''],journal_entry:v.journalEntry,hype_snapshot:v.hypeSnapshot||{},cal_log:v.calLog||[]},{onConflict:'user_id,date_key'});}catch(e){console.error(e);}showSync(false);
+async function syncToCloud(){if(!currentUser)return;showSync(true);try{const uid=currentUser.id;const meta={transactions:state.transactions,moneyGoals:state.moneyGoals,startingBalance:state.startingBalance,weightUnit:state.weightUnit,targetWeight:state.targetWeight,weightLog:state.weightLog,calGoal:state.calGoal,tasks:state.tasks,notdos:state.notdos,shopList:state.shopList,shopCurrency:state.shopCurrency,shopDuration:state.shopDuration,shopDiet:state.shopDiet,lifeData:state.lifeData,fineLog:state.fineLog};await sb.from('profiles').upsert({id:uid,name:state.name,focus:state.focus,alarm_time:state.alarmTime,alarm_on:state.alarmOn,meta});for(const g of state.goals)await sb.from('goals').upsert({id:g.id,user_id:uid,name:g.name,type:g.type,checked_today:g.checkedToday,last_checked:g.lastChecked,streak:g.streak,current:g.current,target:g.target,unit:g.unit});for(const[k,v]of Object.entries(state.dailyLog||{}))await sb.from('daily_log').upsert({user_id:uid,date_key:k,opened:v.opened,goals_done:v.goalsDone,mood:v.mood,intention:v.intention,gratitude:v.gratitude||['','',''],journal_entry:v.journalEntry,hype_snapshot:v.hypeSnapshot||{},cal_log:v.calLog||[]},{onConflict:'user_id,date_key'});}catch(e){console.error(e);}showSync(false);
   // Keep localStorage cache in sync
   localStorage.setItem('riseup_state',JSON.stringify(state));
 }
@@ -515,8 +639,8 @@ document.getElementById('customFocus')?.addEventListener('input',function(){if(t
 async function saveProfile(){state.name=document.getElementById('sName').value.trim()||'Champion';const custom=document.getElementById('customFocus').value.trim();if(custom)state.focus=custom;state.alarmTime=document.getElementById('sAlarmTime').value||'07:00';if(document.getElementById('sNotifToggle').checked)requestNotifPermission();save();showApp();}
 function resetApp(){show('setupScreen');document.getElementById('sName').value=state.name;}
 
-function showApp(){appReady=true;show('mainApp');applyTheme();trackOpen();initHype();initAlarm();initGoals();initIntention();initMood();initGratitude();renderMoneyTab();renderHealthTab();renderTaskTab();renderShopTab();loadHype();}
-function switchTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='tab-'+tab));if(tab==='week')renderWeek();if(tab==='journal')renderJournal();if(tab==='money')renderMoneyTab();if(tab==='health')renderHealthTab();if(tab==='tasks')renderTaskTab();if(tab==='shop')renderShopTab();}
+function showApp(){appReady=true;show('mainApp');applyTheme();trackOpen();initHype();initAlarm();initGoals();initIntention();initMood();initGratitude();renderMoneyTab();renderHealthTab();renderTaskTab();renderShopTab();loadHype();loadFactOfDay();}
+function switchTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='tab-'+tab));if(tab==='week')renderWeek();if(tab==='journal')renderJournal();if(tab==='money')renderMoneyTab();if(tab==='health')renderHealthTab();if(tab==='tasks')renderTaskTab();if(tab==='shop')renderShopTab();if(tab==='life')renderLifeTab();if(tab==='calm')renderCalmTab();}
 
 function todayKey(){return new Date().toDateString();}
 function offsetKey(off){const d=new Date();d.setDate(d.getDate()+off);return d.toDateString();}
@@ -546,7 +670,7 @@ async function loadHype(){
   const timeCtx=`Current time: ${now.toLocaleTimeString()}, date: ${now.toDateString()}.`;
   const prompt=`You are a morning hype coach. IMPORTANT: Generate completely NEW and DIFFERENT content every single time — never repeat previous responses. ${timeCtx} Seed for uniqueness: ${seed}.\n\nCreate morning hype for ${state.name} focused on: ${state.focus}. Tone: ${style}. ${gratCtx} ${intCtx}\n\nReturn ONLY valid JSON, nothing else:\n{"affirmation":"A unique first-person I statement, max 15 words, tone: ${style}","quote":"A DIFFERENT inspiring quote — not overused classics","author":"Real person","pep":"3-4 sentences directly to ${state.name}, tone: ${style}, ends with one concrete action for today","rec_type":"${recType}","rec_title":"A specific ${recType} title relevant to their focus today","rec_creator":"The artist/director/author","rec_reason":"One sentence why this is perfect for them right now"}`;
   try{
-    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:700})});
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:700,messages:[{role:"user",content:prompt}]})});
     const data=await res.json();
     const raw=(data.content||[]).map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
     const p=JSON.parse(raw);
@@ -618,6 +742,281 @@ function deleteCalLog(id){const k=todayKey();ensureLog(k);state.dailyLog[k].calL
 function renderCalSection(){const k=todayKey();ensureLog(k);const logs=state.dailyLog[k].calLog||[];const eaten=logs.filter(l=>l.type==='food').reduce((s,l)=>s+l.calories,0);const burned=logs.filter(l=>l.type==='exercise').reduce((s,l)=>s+l.calories,0);const remain=state.calGoal-eaten+burned;const pct=Math.min(100,Math.round((eaten/state.calGoal)*100));const ci=document.getElementById('calRingFill');if(ci){const c=326.7;ci.style.strokeDashoffset=(c*(1-pct/100)).toFixed(1);}const crEl=document.getElementById('calRemain');if(crEl)crEl.textContent=remain;const cgEl=document.getElementById('calGoalDisp');if(cgEl)cgEl.textContent=state.calGoal;const ceEl=document.getElementById('calEatenDisp');if(ceEl)ceEl.textContent=eaten;const cbEl=document.getElementById('calBurnedDisp');if(cbEl)cbEl.textContent=burned;const cgI=document.getElementById('calGoalInput');if(cgI)cgI.value=state.calGoal||2000;const clEl=document.getElementById('calLog');if(clEl){if(!logs.length){clEl.innerHTML='<div class="empty-state">Nothing logged yet.</div>';}else{clEl.innerHTML=logs.map(l=>`<div class="meal-item"><div style="font-size:16px">${l.type==='food'?'🍽':'🏃'}</div><div class="meal-name">${l.name}</div><div style="font-size:12px;font-weight:600;color:${l.type==='food'?'var(--o2)':'var(--green)'}">${l.type==='food'?'+':'-'}${l.calories}</div><button class="del-btn" onclick="deleteCalLog(${l.id})">×</button></div>`).join('');}}}
 function renderHealthTab(){renderWeightSection();renderCalSection();}
 
+// ── LIFE PREDICTOR ──
+let lifeQuizState={sex:'female',sleep:'ok',ex:'some',diet:'ok',smoke:'no',stress:'med'};
+document.getElementById('lifeSexChips')?.addEventListener('click',e=>{if(e.target.dataset.sex){document.querySelectorAll('#lifeSexChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.sex=e.target.dataset.sex;}});
+document.getElementById('lifeSleepChips')?.addEventListener('click',e=>{if(e.target.dataset.sleep){document.querySelectorAll('#lifeSleepChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.sleep=e.target.dataset.sleep;}});
+document.getElementById('lifeExChips')?.addEventListener('click',e=>{if(e.target.dataset.ex){document.querySelectorAll('#lifeExChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.ex=e.target.dataset.ex;}});
+document.getElementById('lifeDietChips')?.addEventListener('click',e=>{if(e.target.dataset.diet){document.querySelectorAll('#lifeDietChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.diet=e.target.dataset.diet;}});
+document.getElementById('lifeSmokeChips')?.addEventListener('click',e=>{if(e.target.dataset.smoke){document.querySelectorAll('#lifeSmokeChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.smoke=e.target.dataset.smoke;}});
+document.getElementById('lifeStressChips')?.addEventListener('click',e=>{if(e.target.dataset.stress){document.querySelectorAll('#lifeStressChips .chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');lifeQuizState.stress=e.target.dataset.stress;}});
+
+function calculateLifeEstimate(){
+  const age=parseInt(document.getElementById('lifeAge').value);
+  if(isNaN(age)||age<1||age>110){showToast('Enter a valid age');return;}
+  // Baseline actuarial life expectancy (simplified global average)
+  let base=lifeQuizState.sex==='female'?81:76;
+  state.lifeData={baseAge:age,baseline:base,quiz:{...lifeQuizState},setDate:todayKey()};
+  save();
+  renderLifeTab();
+}
+
+function retakeLifeQuiz(){
+  document.getElementById('lifeResultSection').style.display='none';
+  document.getElementById('lifeQuizSection').style.display='block';
+}
+
+function computeLifeAdjustments(){
+  if(!state.lifeData)return null;
+  const q=state.lifeData.quiz;
+  let adj=0;
+  const factors=[];
+  // Quiz baseline adjustments
+  if(q.sleep==='poor'){adj-=2;factors.push({label:'Sleep under 6h',impact:-2,fixed:true});}
+  else if(q.sleep==='great'){adj+=1.5;factors.push({label:'8h+ sleep',impact:1.5,fixed:true});}
+  if(q.ex==='none'){adj-=3;factors.push({label:'Rarely exercising',impact:-3,fixed:true});}
+  else if(q.ex==='lots'){adj+=3;factors.push({label:'Exercising 4x+/week',impact:3,fixed:true});}
+  if(q.diet==='poor'){adj-=2;factors.push({label:'Mostly processed diet',impact:-2,fixed:true});}
+  else if(q.diet==='great'){adj+=2;factors.push({label:'Whole foods diet',impact:2,fixed:true});}
+  if(q.smoke==='yes'){adj-=7;factors.push({label:'Smoking',impact:-7,fixed:true});}
+  if(q.stress==='high'){adj-=2;factors.push({label:'High stress',impact:-2,fixed:true});}
+  else if(q.stress==='low'){adj+=1;factors.push({label:'Low stress',impact:1,fixed:true});}
+
+  // DYNAMIC adjustments based on live app data
+  // Weight trending toward target
+  if(state.weightLog.length>=2&&state.targetWeight){
+    const latest=state.weightLog[0].weight;
+    const oldest=state.weightLog[state.weightLog.length-1].weight;
+    const movingTowardGoal=Math.abs(latest-state.targetWeight)<Math.abs(oldest-state.targetWeight);
+    if(movingTowardGoal){adj+=1;factors.push({label:'Weight trending toward your goal',impact:1,fixed:false});}
+  }
+  // Exercise goal streaks (any progress goal with 'run','gym','workout','exercise' in name)
+  const exerciseGoals=state.goals.filter(g=>/run|gym|workout|exercise|walk|swim|cycle/i.test(g.name));
+  const bestExStreak=exerciseGoals.reduce((m,g)=>Math.max(m,g.streak||0),0);
+  if(bestExStreak>=7){adj+=1;factors.push({label:`${bestExStreak}-day exercise streak`,impact:1,fixed:false});}
+  // Not-to-do streaks (smoking, drinking, junk food)
+  const healthNotDos=state.notdos.filter(n=>/smok|drink|alcohol|junk|sugar|vape/i.test(n.name));
+  healthNotDos.forEach(n=>{if(n.streak>=14){adj+=0.5;factors.push({label:`Kept "${n.name}" for ${n.streak} days`,impact:0.5,fixed:false});}});
+  // Mood trend (proxy for mental health/stress)
+  const recentMoods=Object.values(state.dailyLog||{}).filter(d=>d.mood).slice(-14).map(d=>d.mood);
+  if(recentMoods.length>=5){
+    const avgMood=recentMoods.reduce((a,b)=>a+b,0)/recentMoods.length;
+    if(avgMood>=4){adj+=0.5;factors.push({label:'Consistently good mood',impact:0.5,fixed:false});}
+    else if(avgMood<=2){adj-=0.5;factors.push({label:'Lower mood trend lately',impact:-0.5,fixed:false});}
+  }
+  return{adj,factors};
+}
+
+function renderLifeTab(){
+  if(!state.lifeData){
+    document.getElementById('lifeQuizSection').style.display='block';
+    document.getElementById('lifeResultSection').style.display='none';
+    return;
+  }
+  document.getElementById('lifeQuizSection').style.display='none';
+  document.getElementById('lifeResultSection').style.display='block';
+
+  const{adj,factors}=computeLifeAdjustments();
+  const estimate=Math.round((state.lifeData.baseline+adj)*10)/10;
+  document.getElementById('lifeEstimateAge').textContent=estimate;
+
+  const dynamicCount=factors.filter(f=>!f.fixed).length;
+  document.getElementById('lifeAdjustNote').textContent=dynamicCount>0
+    ? `Adjusted live by ${dynamicCount} habit${dynamicCount>1?'s':''} you're building right now`
+    : 'Keep logging health data to see this number move';
+
+  // Days lived / weeks left / summers left
+  const currentAge=state.lifeData.baseAge;
+  const daysLived=Math.round(currentAge*365.25);
+  const yearsLeft=Math.max(0,estimate-currentAge);
+  const weeksLeft=Math.round(yearsLeft*52.18);
+  const summersLeft=Math.round(yearsLeft);
+  document.getElementById('lifeDaysLived').textContent=daysLived.toLocaleString();
+  document.getElementById('lifeWeeksLeft').textContent=weeksLeft.toLocaleString();
+  document.getElementById('lifeSummersLeft').textContent=summersLeft.toLocaleString();
+
+  const flEl=document.getElementById('lifeFactorsList');
+  if(!factors.length){
+    flEl.innerHTML='<div style="color:var(--dim);">No adjustments yet — your baseline quiz answers are the only factor right now. Log weight, exercise, and habits to see this update.</div>';
+  }else{
+    flEl.innerHTML=factors.map(f=>{
+      const sign=f.impact>0?'+':'';
+      const color=f.impact>0?'var(--green)':'var(--red)';
+      const tag=f.fixed?'':' <span style="color:var(--purple);font-size:10px;">● LIVE</span>';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;"><span>${f.label}${tag}</span><span style="color:${color};font-weight:600;">${sign}${f.impact}y</span></div>`;
+    }).join('');
+  }
+}
+
+// ── FACT OF THE DAY ──
+async function loadFactOfDay(){
+  const cacheKey='riseup_fact_'+todayKey();
+  const cached=localStorage.getItem(cacheKey);
+  if(cached){document.getElementById('factText').textContent=cached;return;}
+  setLoad('factText');
+  const prompt=`Give ONE single surprising, calming, perspective-shifting fact that helps someone stress less about their daily problems — something about the scale of time, space, nature, history, or the human body. Make it specific and vivid, max 2 sentences, no preamble. Examples of the STYLE (write a different one): "Every atom in your body was forged in a dying star — you are, quite literally, stardust having a bad Monday." Return ONLY the fact text, nothing else.`;
+  try{
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:150})});
+    const data=await res.json();
+    const text=(data.content||[]).map(b=>b.text||'').join('').trim();
+    if(text){localStorage.setItem(cacheKey,text);document.getElementById('factText').textContent=text;}
+    else throw new Error('empty');
+  }catch{
+    const fallbacks=['There are more possible games of chess than atoms in the observable universe — your to-do list is comparatively tiny.','Your body replaces most of its cells every 7-10 years. The version of you that made that mistake literally no longer exists.','Light from the sun takes 8 minutes to reach Earth — every sunset you see already happened 8 minutes ago. Time is stranger than your stress.','The Earth has survived 5 mass extinctions. Your inbox will be fine.'];
+    document.getElementById('factText').textContent=fallbacks[Math.floor(Math.random()*fallbacks.length)];
+  }
+}
+
+// ── CALM TAB ──
+function renderCalmTab(){
+  // Restore any in-progress brain dump
+  const draft=localStorage.getItem('riseup_dump_draft');
+  if(draft)document.getElementById('dumpText').value=draft;
+  renderFineList();
+}
+
+// Breathing exercise
+let breathInterval=null,breathRunning=false;
+function startBreathing(){
+  if(breathRunning){stopBreathing();return;}
+  breathRunning=true;
+  const btn=document.getElementById('breathBtn');
+  btn.textContent='STOP';
+  const circle=document.getElementById('breathCircle');
+  const label=document.getElementById('breathLabel');
+  const sub=document.getElementById('breathSub');
+  let round=0;
+  const totalRounds=4;
+  const phases=[
+    {name:'Breathe In',cls:'inhale',dur:4000},
+    {name:'Hold',cls:'hold',dur:4000},
+    {name:'Breathe Out',cls:'exhale',dur:4000},
+    {name:'Hold',cls:'hold',dur:4000}
+  ];
+  let phaseIdx=0;
+  function runPhase(){
+    if(!breathRunning)return;
+    const phase=phases[phaseIdx];
+    circle.className='breath-circle '+phase.cls;
+    label.textContent=phase.name;
+    sub.textContent=`Round ${round+1} of ${totalRounds}`;
+    breathInterval=setTimeout(()=>{
+      phaseIdx++;
+      if(phaseIdx>=phases.length){
+        phaseIdx=0;round++;
+        if(round>=totalRounds){
+          finishBreathing();
+          return;
+        }
+      }
+      runPhase();
+    },phase.dur);
+  }
+  runPhase();
+}
+function finishBreathing(){
+  breathRunning=false;
+  const circle=document.getElementById('breathCircle');
+  const label=document.getElementById('breathLabel');
+  const sub=document.getElementById('breathSub');
+  circle.className='breath-circle';
+  label.textContent='Well done 🌿';
+  sub.textContent='4 rounds complete. Notice how your body feels right now.';
+  document.getElementById('breathBtn').textContent='BREATHE AGAIN';
+  showToast('Nice work — you showed up for yourself 🌬️');
+}
+function stopBreathing(){
+  breathRunning=false;
+  if(breathInterval)clearTimeout(breathInterval);
+  const circle=document.getElementById('breathCircle');
+  const label=document.getElementById('breathLabel');
+  const sub=document.getElementById('breathSub');
+  circle.className='breath-circle';
+  label.textContent='Ready?';
+  sub.textContent='4 seconds in, 4 hold, 4 out, 4 hold — repeated for 4 rounds';
+  document.getElementById('breathBtn').textContent='START BREATHING';
+}
+
+// Brain dump
+document.getElementById('dumpText')?.addEventListener('input',function(){
+  localStorage.setItem('riseup_dump_draft',this.value);
+});
+function clearDump(){
+  if(!confirm('Clear everything you wrote?'))return;
+  document.getElementById('dumpText').value='';
+  localStorage.removeItem('riseup_dump_draft');
+  showToast('Cleared. Hope that helped 🌿');
+}
+function saveDumpToJournal(){
+  const val=document.getElementById('dumpText').value.trim();
+  if(!val){showToast('Nothing to save yet');return;}
+  const k=todayKey();ensureLog(k);
+  const existing=state.dailyLog[k].journalEntry;
+  state.dailyLog[k].journalEntry=existing?existing+'\n\n--- Brain Dump ---\n'+val:val;
+  save();
+  document.getElementById('dumpText').value='';
+  localStorage.removeItem('riseup_dump_draft');
+  showToast('Saved to today\'s journal 📓');
+}
+
+// Worry sorting
+async function sortWorry(){
+  const val=document.getElementById('worryInput').value.trim();
+  if(!val){showToast('Write down the worry first');return;}
+  const btn=document.getElementById('worrySortBtn');
+  btn.disabled=true;btn.textContent='Thinking…';
+  const resultArea=document.getElementById('worryResultArea');
+  resultArea.innerHTML='<div class="worry-result"><div class="ld"><div class="dots"><span></span><span></span><span></span></div>Sorting...</div></div>';
+  const prompt=`Someone is worried about: "${val}"\nDecide if this is something WITHIN their control (they can take direct action) or OUTSIDE their control (they cannot directly influence the outcome).\nReturn ONLY valid JSON:\n{"category":"control" or "outside","reframe":"One warm, specific sentence. If within control, suggest ONE small concrete next action. If outside control, offer a grounding reframe for letting it go."}`;
+  try{
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:200})});
+    const data=await res.json();
+    const raw=(data.content||[]).map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(raw);
+    const isControl=parsed.category==='control';
+    resultArea.innerHTML=`<div class="worry-result"><div class="worry-tag ${isControl?'control':'outside'}">${isControl?'✓ Within your control':'○ Outside your control'}</div><div style="font-size:13px;color:var(--white);line-height:1.6;">${parsed.reframe}</div></div>`;
+  }catch{
+    resultArea.innerHTML=`<div class="worry-result"><div class="worry-tag outside">○ Worth reflecting on</div><div style="font-size:13px;color:var(--white);line-height:1.6;">Ask yourself: is there one small thing you could do about this today? If yes, do that and let the rest go. If not, it may be time to release it.</div></div>`;
+  }
+  document.getElementById('worryInput').value='';
+  btn.disabled=false;btn.textContent='Sort This Worry';
+}
+
+// Turned out fine log
+function addFineEntry(){
+  const val=document.getElementById('fineWorryInput').value.trim();
+  if(!val){showToast('Write down what you\'re worried about');return;}
+  state.fineLog.unshift({id:Date.now(),worry:val,resolved:false,date:new Date().toLocaleDateString('en-GB'),resolvedDate:null});
+  document.getElementById('fineWorryInput').value='';
+  save();renderFineList();showToast('Logged. Come back later and see how it went 💛');
+}
+function resolveFineEntry(id){
+  const e=state.fineLog.find(x=>x.id===id);if(!e)return;
+  e.resolved=true;e.resolvedDate=new Date().toLocaleDateString('en-GB');
+  save();renderFineList();showToast('🎉 Another one that turned out fine');
+}
+function deleteFineEntry(id){
+  state.fineLog=state.fineLog.filter(x=>x.id!==id);
+  save();renderFineList();
+}
+function renderFineList(){
+  const el=document.getElementById('fineList');if(!el)return;
+  if(!state.fineLog.length){el.innerHTML='<div class="empty-state" style="padding:14px;">No entries yet. Log a worry above and check back on it later.</div>';return;}
+  const resolvedCount=state.fineLog.filter(e=>e.resolved).length;
+  const totalCount=state.fineLog.length;
+  let html='';
+  if(resolvedCount>0){
+    html+=`<div style="text-align:center;font-size:12px;color:var(--green);font-weight:600;margin-bottom:10px;">✨ ${resolvedCount} of ${totalCount} worries turned out fine</div>`;
+  }
+  html+=state.fineLog.map(e=>{
+    if(e.resolved){
+      return `<div class="fine-item"><div class="fine-emoji">✅</div><div class="fine-text"><div class="worried">${e.worry}</div><div>Turned out fine 💛</div><div class="fine-date">Worried ${e.date} → Resolved ${e.resolvedDate}</div></div><button class="del-btn" onclick="deleteFineEntry(${e.id})">×</button></div>`;
+    }
+    return `<div class="fine-item"><div class="fine-emoji">⏳</div><div class="fine-text"><div>${e.worry}</div><div class="fine-date">Logged ${e.date}</div></div><button class="fine-resolve-btn" onclick="resolveFineEntry(${e.id})">Mark Fine</button><button class="del-btn" onclick="deleteFineEntry(${e.id})">×</button></div>`;
+  }).join('');
+  el.innerHTML=html;
+}
+
 function setCurrency(c,el){state.shopCurrency=c;['gbpBtn','usdBtn','eurBtn'].forEach(id=>document.getElementById(id).classList.remove('active'));el.classList.add('active');}
 function setDuration(d,el){state.shopDuration=d;document.getElementById('d7Btn').classList.toggle('active',d===7);document.getElementById('d14Btn').classList.toggle('active',d===14);}
 document.querySelectorAll('#dietChips .chip').forEach(c=>{c.addEventListener('click',()=>{document.querySelectorAll('#dietChips .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');shopDiet=c.dataset.diet;state.shopDiet=shopDiet;});});
@@ -632,10 +1031,10 @@ async function generateShoppingList(){
   try{
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),30000);
-    const res=await fetch("/api/chat",{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({prompt,max_tokens:1500}),
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1500,messages:[{role:"user",content:prompt}]}),
       signal:controller.signal
     });
     clearTimeout(timeout);
@@ -688,7 +1087,7 @@ function shiftWeek(dir){weekOffset+=dir;if(weekOffset>0)weekOffset=0;renderWeek(
 function getWeekDays(off){const now=new Date(),dow=now.getDay(),mon=new Date(now);mon.setDate(now.getDate()-((dow+6)%7)+off*7);mon.setHours(0,0,0,0);return Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});}
 function renderWeek(){const days=getWeekDays(weekOffset),log=state.dailyLog||{},today=new Date().toDateString();const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});document.getElementById('weekLabel').textContent=weekOffset===0?'THIS WEEK':`${fmt(days[0])} - ${fmt(days[6])}`;let daysOpened=0,totalGoals=0,moodSum=0,moodCount=0;days.forEach(d=>{const e=log[d.toDateString()];if(e?.opened)daysOpened++;if(e?.goalsDone)totalGoals+=e.goalsDone;if(e?.mood){moodSum+=e.mood;moodCount++;}});const bestStreak=state.goals.reduce((max,g)=>Math.max(max,g.streak||0),0);const avgMood=moodCount?Math.round(moodSum/moodCount):0;const me=['','😴','😕','😐','😊','🔥'];document.getElementById('wDays').textContent=daysOpened;document.getElementById('wGoals').textContent=totalGoals;document.getElementById('wStreak').textContent=bestStreak;document.getElementById('wMood').textContent=avgMood?me[avgMood]:'—';const dn=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];document.getElementById('dayGrid').innerHTML=days.map((d,i)=>{const e=log[d.toDateString()],isToday=d.toDateString()===today;return `<div class="dcell ${isToday?'today':''}"><div class="dcn">${dn[i]}</div><div class="dcd ${e?.opened?'opened':''}"></div><div class="dcm">${e?.mood?me[e.mood]:''}</div></div>`;}).join('');document.getElementById('weekGoalsList').innerHTML=state.goals.map(g=>{const pct=g.type==='progress'?Math.min(100,Math.round((g.current/(g.target||1))*100)):Math.min(100,Math.round((g.streak/7)*100));return `<div class="wgoal"><div style="flex:1"><div class="wgn">${g.name}</div><div class="wgb"><div class="wgbf" style="width:${pct}%"></div></div></div><div class="wgs">🔥 ${g.streak}d</div></div>`;}).join('');}
 
-async function generateWeeklyReview(){const btn=document.getElementById('reviewBtn');btn.disabled=true;btn.textContent='✨ GENERATING…';const days=getWeekDays(weekOffset),log=state.dailyLog||{},me=['','😴','😕','😐','😊','🔥'];let daysOpened=0,totalGoals=0,moods=[],intentions=[],journals=[],gratitudes=[];const inc=state.transactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);const exp=state.transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);const lw=state.weightLog[0];days.forEach(d=>{const e=log[d.toDateString()];if(e?.opened)daysOpened++;if(e?.goalsDone)totalGoals+=e.goalsDone;if(e?.mood)moods.push(me[e.mood]);if(e?.intention)intentions.push(e.intention);if(e?.journalEntry)journals.push(e.journalEntry.slice(0,80));if(e?.gratitude)gratitudes.push(...(e.gratitude||[]).filter(g=>g));});const bestStreak=state.goals.reduce((max,g)=>Math.max(max,g.streak||0),0);const cur=getCur();const prompt=`Warm life coach reviewing the week.\n${state.name}, focused on: ${state.focus}\nDays: ${daysOpened}/7, Goals: ${totalGoals}, Streak: ${bestStreak}\nMoods: ${moods.join(', ')||'not tracked'}\nIntentions: ${intentions.join(' | ')||'none'}\nJournal: ${journals.join(' | ')||'none'}\nGratitude: ${[...new Set(gratitudes)].join(', ')||'none'}\nMoney: income ${cur}${inc.toFixed(0)}, spent ${cur}${exp.toFixed(0)}\n${lw?`Weight: ${lw.weight}${lw.unit}${state.targetWeight?`, target: ${state.targetWeight}`:''}`:''}  \nWrite a warm personal 4-5 sentence weekly review. Celebrate wins across mindset, money, health, goals. Gently acknowledge gaps. End with one intention for next week. Address ${state.name} directly. No headers.`;try{const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:350})});const data=await res.json();document.getElementById('aiReviewCard').style.display='block';document.getElementById('aiReviewText').textContent=data.content.map(b=>b.text||'').join('').trim();}catch{document.getElementById('aiReviewCard').style.display='block';document.getElementById('aiReviewText').textContent=`${state.name}, showing up ${daysOpened}/7 days is the foundation everything else builds on. Keep going.`;}btn.disabled=false;btn.textContent='✨ Regenerate Review';}
+async function generateWeeklyReview(){const btn=document.getElementById('reviewBtn');btn.disabled=true;btn.textContent='✨ GENERATING…';const days=getWeekDays(weekOffset),log=state.dailyLog||{},me=['','😴','😕','😐','😊','🔥'];let daysOpened=0,totalGoals=0,moods=[],intentions=[],journals=[],gratitudes=[];const inc=state.transactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);const exp=state.transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);const lw=state.weightLog[0];days.forEach(d=>{const e=log[d.toDateString()];if(e?.opened)daysOpened++;if(e?.goalsDone)totalGoals+=e.goalsDone;if(e?.mood)moods.push(me[e.mood]);if(e?.intention)intentions.push(e.intention);if(e?.journalEntry)journals.push(e.journalEntry.slice(0,80));if(e?.gratitude)gratitudes.push(...(e.gratitude||[]).filter(g=>g));});const bestStreak=state.goals.reduce((max,g)=>Math.max(max,g.streak||0),0);const cur=getCur();const prompt=`Warm life coach reviewing the week.\n${state.name}, focused on: ${state.focus}\nDays: ${daysOpened}/7, Goals: ${totalGoals}, Streak: ${bestStreak}\nMoods: ${moods.join(', ')||'not tracked'}\nIntentions: ${intentions.join(' | ')||'none'}\nJournal: ${journals.join(' | ')||'none'}\nGratitude: ${[...new Set(gratitudes)].join(', ')||'none'}\nMoney: income ${cur}${inc.toFixed(0)}, spent ${cur}${exp.toFixed(0)}\n${lw?`Weight: ${lw.weight}${lw.unit}${state.targetWeight?`, target: ${state.targetWeight}`:''}`:''}  \nWrite a warm personal 4-5 sentence weekly review. Celebrate wins across mindset, money, health, goals. Gently acknowledge gaps. End with one intention for next week. Address ${state.name} directly. No headers.`;try{const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:350,messages:[{role:"user",content:prompt}]})});const data=await res.json();document.getElementById('aiReviewCard').style.display='block';document.getElementById('aiReviewText').textContent=data.content.map(b=>b.text||'').join('').trim();}catch{document.getElementById('aiReviewCard').style.display='block';document.getElementById('aiReviewText').textContent=`${state.name}, showing up ${daysOpened}/7 days is the foundation everything else builds on. Keep going.`;}btn.disabled=false;btn.textContent='✨ Regenerate Review';}
 
 function initAlarm(){document.getElementById('alarmTimePicker').value=state.alarmTime;updateAlarmDisplay();refreshAlarmUI();if(state.alarmOn)scheduleAlarm();}
 function updateAlarmDisplay(){const val=document.getElementById('alarmTimePicker').value;if(!val)return;const[h,m]=val.split(':').map(Number),ap=h>=12?'PM':'AM',h12=h%12||12;document.getElementById('alarmDisplay').textContent=`${h12}:${String(m).padStart(2,'0')} ${ap}`;state.alarmTime=val;save();}
